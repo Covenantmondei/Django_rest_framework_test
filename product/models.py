@@ -14,4 +14,14 @@ class Product(models.Model):
 class Logistics(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
-    
+
+
+
+class UserClass(models.Model):
+    username = models.CharField(max_length=255)
+    email = models.EmailField(unique=True)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(UserClass, related_name="user_profile", on_delete=models.CASCADE)
+    dob = models.DateField()
