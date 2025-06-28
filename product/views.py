@@ -19,6 +19,8 @@ class Hello(APIView):
 
         return Response({"message": f"Hello, {name}!"})
 
+
+
 class Logistic(APIView):
 
     parser_classes = (FormParser, MultiPartParser, JSONParser)
@@ -36,8 +38,8 @@ class Logistic(APIView):
                 recipient_list=[email],
                 fail_silently=False,
             )
-            print(name, email)
-            print(request.data)
+            # print(name, email)
+            # print(request.data)
 
 
         except Exception as e:
