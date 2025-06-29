@@ -15,7 +15,13 @@ class Logistics(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
 
+class School(models.Model):
+    name = models.CharField(max_length=255)
+    branch = models.CharField(max_length=255)
 
+class Student(models.Model):
+    name = models.CharField(max_length=255)
+    school = models.ForeignKey(School, on_delete=models.CASCADE, related_name="school")
 
 class UserClass(models.Model):
     username = models.CharField(max_length=255)
@@ -25,3 +31,12 @@ class UserClass(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(UserClass, related_name="user_profile", on_delete=models.CASCADE)
     dob = models.DateField()
+    marital_status = models.CharField(max_length=255, null=True, blank=True)
+
+class Courses(models.Model):
+    title = models.CharField(max_length=255)
+    students = models.ManyToManyField(School, related_name="offered")
+
+# name = ["covenant", "david", "imo", "victory", "idara", "monday", "victor", "dell", "wisdom", "brown", "micheal", "james", "joseph", "john", "peter", "paul", "stephen", "daniel", "samuel", "solomon"]
+
+# id = [1, 2, 3, 4, 5]
