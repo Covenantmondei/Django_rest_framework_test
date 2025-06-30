@@ -35,8 +35,8 @@ class Profile(models.Model):
 
 class Courses(models.Model):
     title = models.CharField(max_length=255)
-    students = models.ManyToManyField(School, related_name="offered")
+    students = models.ManyToManyField(Student, related_name="offered")
 
 # name = ["covenant", "david", "imo", "victory", "idara", "monday", "victor", "dell", "wisdom", "brown", "micheal", "james", "joseph", "john", "peter", "paul", "stephen", "daniel", "samuel", "solomon"]
 
-# id = [1, 2, 3, 4, 5]
+# id = [1, 2, 3, 4, 5]=
