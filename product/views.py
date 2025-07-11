@@ -2,10 +2,12 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
-from .models import Product
+from .models import Product, Student, School
+from .serializers import SchoolSerializer, StudentSerializer
 from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
+from rest_framework.decorators import api_view
 
 class Hello(APIView):
 
@@ -47,3 +49,19 @@ class Logistic(APIView):
             return Response({"error": "Failed to send email"}, status=500)
         return Response({"message": f"Logistics request received for {name}!"}, status=200)
         
+
+@api_view(['POST'])
+def create_school(request):
+    """This function is to create a School"""
+    serializer = SchoolSerializer(data=request.data)
+    
+    school = School
+
+    if serializer.is_valid():
+        pass
+    
+    return Response({"Error": serializer.errors})
+
+def list_school():
+    """This function lists all the schools available"""
+    pass
