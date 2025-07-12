@@ -54,14 +54,25 @@ class Logistic(APIView):
 def create_school(request):
     """This function is to create a School"""
     serializer = SchoolSerializer(data=request.data)
-    
-    school = School
 
     if serializer.is_valid():
-        pass
+        serializer.save()
+        return Response({"message": serializer.data}, status=201)
     
-    return Response({"Error": serializer.errors})
+    return Response({"error": serializer.errors})
 
-def list_school():
+def list_school(request):
     """This function lists all the schools available"""
-    pass
+    serializer = StudentSerializer(data=request.data)
+
+
+@api_view(['POST'])
+def create_student(request):
+    school_id = request.data.get('school')
+    serializer = StudentSerializer(data=request.data , context={"school": school_id})
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response({"message": serializer.data}, status=201)
+    
+    return Response({"error": serializer.errors})
