@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
 from rest_framework.decorators import api_view
+from rest_framework.generics import ListAPIView, CreateAPIView
 
 class Hello(APIView):
 
@@ -76,3 +77,18 @@ def create_student(request):
         return Response({"message": serializer.data}, status=201)
     
     return Response({"error": serializer.errors})
+
+
+class HelloWorld(APIView):
+    def get(self, request):
+        return Response({"Message": "Hello World!"})
+    
+
+class MarketList(ListAPIView):
+    queryset = School.objects.all()
+    serializer_class = SchoolSerializer
+
+
+class CreateMarket(CreateAPIView):
+    queryset = School.objects.all()
+    serializer_class = SchoolSerializer
